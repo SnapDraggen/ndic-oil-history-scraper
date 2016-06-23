@@ -6,7 +6,7 @@ Usage:
 ruby history-data.rb [file-number]
 ```
 
-A `.csv` file is outputted. The file name is `output-<file-number>-<unix-epoch>.csv`
+A `.csv` file is outputted. The file name is `well- <ndic tag> date- <date and time>.csv`
 
 ### Setup:
 
