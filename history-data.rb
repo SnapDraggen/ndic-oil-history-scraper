@@ -6,6 +6,7 @@ require 'nokogiri'
 require 'uri'
 require 'yaml'
 require 'openssl'
+time = Time.now.to_s.gsub!(':','.')
 OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
 config = YAML.load_file('auth.yml')
@@ -31,7 +32,9 @@ page.css('table').last.css('tr').each do |tr|
   rows << tr.css('td').map(&:content)
 end
 
-CSV.open("output-#{ARGV[0]}-#{DateTime.now.to_time.to_i}.csv", 'w') do |file|
+puts "Leeeeeroooy Jeenkins!"
+
+CSV.open("well number- #{ARGV[0]} time- "+ time +" .csv", 'w') do |file|
   rows.each do |row|
     file << row
   end
