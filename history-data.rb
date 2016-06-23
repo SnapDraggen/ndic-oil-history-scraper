@@ -5,6 +5,8 @@ require 'net/http'
 require 'nokogiri'
 require 'uri'
 require 'yaml'
+require 'openssl'
+OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
 config = YAML.load_file('auth.yml')
 
