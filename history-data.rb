@@ -28,11 +28,11 @@ page = Nokogiri::HTML(response.body)
 
 rows = []
 page.css('table').last.css('tr').each do |tr|
-  rows << tr.css('td').map(&:content).join(',')
+  rows << tr.css('td').map(&:content)
 end
 
 CSV.open("output-#{ARGV[0]}-#{DateTime.now.to_time.to_i}.csv", 'w') do |file|
   rows.each do |row|
-    file << row.parse_csv
+    file << row
   end
 end
