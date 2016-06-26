@@ -27,16 +27,15 @@ ARGV.each do |file_number|
 
 	page = Nokogiri::HTML(response.body)
 
-
-	rows = []
-	page.css('table').last.css('tr').each do |tr|
+	table = page.css('table').last
+	
+	rows = [table.css('th').map(&:content)]
+	table.css('tr').each do |tr|
 	  rows << tr.css('td').map(&:content)
 	end
 
-	puts "Leeeeeroooy Jeenkins!"
-
 	CSV.open("well-number-#{file_number}-time-#{Time.now.strftime('%Y-%m-%d')}.csv", 'w') do |file|
-	  rows.each do |row|
+    rows.each do |row|
 	    file << row
 	  end
 	end
