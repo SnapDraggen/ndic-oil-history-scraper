@@ -50,6 +50,10 @@ class WellParser
   def to_s
     "Well Number: #{@file_number}"
   end
+
+  def get_title_row
+    @page.css('table')[1].css('div').map(&:content)
+  end
 end
 
 OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
@@ -63,6 +67,8 @@ end
 
 wells.each do |well|
   CSV.open("well-number-#{well.file_number}-Date-#{Time.now.strftime('%Y-%m-%d')}.csv", 'w') do |file|
+    file << well.get_title_row
+    file << [well]
     file << well.get_header_row
     well.get_data_rows.each do |row|
       file << row
@@ -75,6 +81,7 @@ unless ARGV[1] == nil
     file << wells.first.get_header_row
     wells.each do |well|
       file << []
+      file << well.get_title_row
       file << [well]
       well.get_data_rows.each do |row|
         file << row
