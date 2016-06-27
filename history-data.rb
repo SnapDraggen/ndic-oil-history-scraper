@@ -74,6 +74,7 @@ unless ARGV[1] == nil
   CSV.open("Multi-Well-Date-#{Time.now.strftime('%Y-%m-%d')}.csv", 'w') do |file|
     file << wells.first.get_header_row
     wells.each do |well|
+      file << []
       file << [well]
       well.get_data_rows.each do |row|
         file << row
