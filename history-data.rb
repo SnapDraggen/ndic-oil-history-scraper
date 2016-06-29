@@ -60,8 +60,11 @@ OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
 config = YAML.load_file('auth.yml')
 
+puts "Put in Well NDIC Tags Separated by Commas..."
+well_numbers = gets.chomp.split(",")
+
 wells = []
-ARGV.each do |file_number|
+well_numbers.each do |file_number|
   wells << WellParser.new("https://www.dmr.nd.gov/oilgas/feeservices/getwellprod.asp", config['auth'], file_number)
 end
 
@@ -76,7 +79,7 @@ wells.each do |well|
   end
 end
 
-unless ARGV[1] == nil
+unless well_numbers.length == 1
   CSV.open("Multi-Well-Date-#{Time.now.strftime('%Y-%m-%d')}.csv", 'w') do |file|
     file << wells.first.get_header_row
     wells.each do |well|
