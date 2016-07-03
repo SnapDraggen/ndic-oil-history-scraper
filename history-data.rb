@@ -60,8 +60,8 @@ OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
 config = YAML.load_file('auth.yml')
 
-puts "Put in Well NDIC Tags Separated by Commas..."
-well_numbers = gets.chomp.split(",")
+puts "Put in Well NDIC Tags Separated by Spaces..."
+well_numbers = gets.chomp.split(" ")
 
 wells = []
 well_numbers.each do |file_number|
